@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "room-week-view/room-week-view",
+  "version": "0.1.0",
+  "title": "Room Week View",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Displays the occupancy of multiple rooms side by side",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "room-week-view",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
