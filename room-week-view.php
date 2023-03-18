@@ -29,7 +29,7 @@ function room_week_view_frontend_scripts() {
 	if ( has_block( 'room-week-view/room-week-view' ) ) {
 		wp_enqueue_script(
 			'room_week_view',
-        		plugins_url( 'dist/room_week_view.js', __FILE__ ),
+        		plugins_url( 'public/js/room_week_view.js', __FILE__ ),
 			array( 'jquery' ),
 			filemtime( plugin_dir_path( __FILE__ ) . 'dist/room_week_view.js' )
 		);
