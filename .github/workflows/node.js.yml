@@ -23,7 +23,7 @@ jobs:
     - run: npm run plugin-zip
     - run: npm test
     - name: Archive ZIP build version
-        uses: actions/upload-artifact@v3
-        with:
-          name: Plugin-ZIP
-          path: room-week-view.zip
+      uses: actions/upload-artifact@v3
+      with:
+        name: Plugin-ZIP
+        path: room-week-view.zip

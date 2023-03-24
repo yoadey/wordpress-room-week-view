@@ -19,9 +19,13 @@ export function calendarGenerator({ attributes, setAttributes, eventsMap }) {
 function timeCol(attributes) {
     const timeEntries = []
     for (var i = attributes.dayStartTime; i <= attributes.dayEndTime; i += (1 / attributes.timeslotsPerHour)) {
-        var time = toTime(i);
+        var time = "";
+        if(i % 0.5 === 0) {
+            time= toTime(i);
+        }
+        const hourClass = (i-i%1) % 2 === 0 ? "cal-row-hour" : "";
         timeEntries.push(
-            <div key={i} className="cal-row">{time}</div>
+            <div key={i} className={`cal-row ${hourClass}`}>{time}</div>
         );
     }
     return (
@@ -75,8 +79,9 @@ function roomCol(attributes, setAttributes, day, room, lastRoom, events) {
             event = eventsIter.next().value;
         } else if (!event || event.startTime > i) {
             const time = i;
+            const hourClass = (i-i%1) % 2 === 0 ? "cal-row-hour" : "";
             roomColEntries.push(
-                <div key={time} className="cal-row" onClick={() => editEvent(attributes, setAttributes, room, day, time)}></div>
+                <div key={time} className={`cal-row ${hourClass}`} onClick={() => editEvent(attributes, setAttributes, room, day, time)}></div>
             );
         }
     }
