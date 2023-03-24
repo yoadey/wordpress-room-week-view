@@ -28,7 +28,6 @@ import metadata from './block.json';
  */
 registerBlockType(metadata.name, {
 	attributes: {
-		
         dayStartTime: {
 			type: 'number ',
 			default: 12
@@ -66,6 +65,25 @@ registerBlockType(metadata.name, {
 			}
 		}
 	},
+	/*
+	edit: ( props ) => {
+        const {
+            attributes: { dayStartTime },
+            setAttributes
+        } = props;
+        const blockProps = useBlockProps();
+        const onChangeContent = ( newDayStartTime ) => {
+            setAttributes( { dayStartTime: newDayStartTime } );
+        };
+        return (
+            <RichText
+                { ...blockProps }
+                tagName="p"
+                onChange={ onChangeContent }
+                value={ dayStartTime }
+            />
+        );
+    }, */
 	/**
 	 * @see ./edit.js
 	 */
