@@ -31,4 +31,5 @@ jQuery(window).load(function () {
   jQuery('.cal-room-selector').each(function (index, value) {
     jQuery(this).change(updateRooms)
   })
+  updateRooms();
 });

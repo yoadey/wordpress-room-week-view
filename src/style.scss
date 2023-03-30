@@ -103,3 +103,87 @@ p.cal-event-description {
     word-break: break-word;
     white-space: normal;
 }
+
+.cal-tooltip-row {
+	margin: 0px;
+	font-size: 12px;
+	color: #333;
+	display: inline-block;
+	width: calc(100% - 20px);
+	vertical-align: middle;
+
+    word-break: break-word;
+    white-space: normal;
+}
+
+.cal-tooltip-row.icon {
+	width: 20px;
+}
+
+.cal-event {
+	background-color: var(--event-color);
+    position:relative;
+	height: var(--event-height);
+}
+
+.cal-event .tooltip {
+    width:var(--cal-col-width); 
+    left:50%;
+	background-color: var(--event-color);
+    padding:10px 5px;
+    border-radius:8px;
+    position:absolute;
+    z-index:99999999;
+    box-sizing:border-box;
+    display:none;
+	border: 1px solid black;
+}
+
+.cal-event:hover .tooltip {
+    display:block;
+}
+
+.cal-event .tooltip i {
+    position:absolute;
+    left:50%;
+    margin-left:-12px;
+    width:24px;
+    height:12px;
+    overflow:hidden;
+}
+
+.cal-event .tooltip i::after {
+    content:'';
+    position:absolute;
+    width:12px;
+    height:12px;
+    left:50%;
+	background-color: var(--event-color);
+	border: 1px solid black;
+}
+
+.cal-event .top {
+    top:-12px;
+    transform:translate(-50%, -100%);
+}
+
+.cal-event .top i {
+    top:100%;
+}
+
+.cal-event .top i::after {
+    transform:translate(-50%,-50%) rotate(45deg);
+}
+
+.cal-event .bottom {
+    top: calc(min(var(--event-height) + 10px, 250px));
+    transform:translate(-50%, 0);
+}
+
+.cal-event .bottom i {
+    bottom:100%;
+}
+
+.cal-event .bottom i::after {
+    transform:translate(-50%,50%) rotate(45deg);
+}

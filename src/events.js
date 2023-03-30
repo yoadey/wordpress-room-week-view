@@ -2,6 +2,7 @@
 import {
 	Button,
 	SelectControl,
+	CheckboxControl,
 	Modal,
 	Flex,
 	__experimentalInputControl as InputControl
@@ -19,6 +20,7 @@ export function editEvent(attributes, setAttributes, room, day, time, event) {
 			editId: event.id,
 			editTitle: event.title,
 			editDescription: event.description,
+			editShowDescription: event.showDescription,
 			editCategory: event.category,
 			editStartTime: event.startTime,
 			editEndTime: event.endTime,
@@ -30,6 +32,7 @@ export function editEvent(attributes, setAttributes, room, day, time, event) {
 			editId: crypto.randomUUID(),
 			editTitle: "Titel",
 			editDescription: "Beschreibung",
+			editShowDescription: true,
 			editCategory: Object.values(attributes.categories)[0].id,
 			editStartTime: time,
 			editEndTime: time + 1,
@@ -128,6 +131,16 @@ export function editEventControl(attributes, setAttributes) {
 					</td>
 				</tr>
 				<tr>
+					<td>Beschreibung anzeigen:</td>
+					<td>
+						<CheckboxControl
+							label=""
+							checked={attributes.editShowDescription}
+							onChange={(content) => setAttributes({ editShowDescription: content })}
+						/>
+					</td>
+				</tr>
+				<tr>
 					<td>Kategorie:</td>
 					<td>
 						<SelectControl
@@ -161,6 +174,7 @@ function deleteEvent(attributes, setAttributes) {
 		editId: undefined,
 		editTitle: undefined,
 		editDescription: undefined,
+		editShowDescription: undefined,
 		editCategory: undefined,
 		editStartTime: undefined,
 		editEndTime: undefined,
@@ -207,6 +221,7 @@ function saveEvent(attributes, setAttributes) {
 			id: attributes.editId,
 			title: attributes.editTitle,
 			description: attributes.editDescription,
+			showDescription: attributes.editShowDescription,
 			category: attributes.editCategory,
 			startTime: attributes.editStartTime,
 			endTime: attributes.editEndTime,
@@ -219,6 +234,7 @@ function saveEvent(attributes, setAttributes) {
 			editId: undefined,
 			editTitle: undefined,
 			editDescription: undefined,
+			editShowDescription: undefined,
 			editCategory: undefined,
 			editStartTime: undefined,
 			editEndTime: undefined,

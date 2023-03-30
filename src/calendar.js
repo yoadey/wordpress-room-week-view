@@ -65,14 +65,32 @@ function roomCol(attributes, setAttributes, day, room, lastRoom, events) {
     for (var i = attributes.dayStartTime; i <= attributes.dayEndTime; i += (1 / attributes.timeslotsPerHour)) {
         if (event && event.startTime === i) {
             var height = (event.endTime - event.startTime) * attributes.timeslotsPerHour * rowHeight;
+            var tooltipClass = i > (attributes.dayEndTime - attributes.dayStartTime)/2 + attributes.dayStartTime ? "top" : "bottom"; 
 
             const editEventConst = event, time = i;
             roomColEntries.push(
-                <div key={time} className="cal-row"
-                    style={{height: `${height}px`, backgroundColor: attributes.categories[event.category].color}}
+                <div key={time} className="cal-row cal-event"
+                    style={{"--event-height": `${height}px`, "--event-color": attributes.categories[event.category].color}}
                     onClick={() => editEvent(attributes, setAttributes, room, day, time, editEventConst)}>
                     <p className="cal-event-title">{event.title}</p>
-                    <p className="cal-event-description">{event.description}</p>
+                    { event.showDescription ? <p className="cal-event-description">{event.description}</p> : null }
+                    <div class={ `tooltip ${tooltipClass}` }>
+                        <p className="cal-event-title">{event.title}</p>
+                        <p className="cal-event-description">{event.description}</p>
+                        <div>
+                            <div className="cal-tooltip-row icon"><span class="dashicons dashicons-clock"></span></div>
+                            <div className="cal-tooltip-row">{toTime(event.startTime)} - {toTime(event.endTime)}</div>
+                        </div>
+                        <div>
+                            <div className="cal-tooltip-row icon"><span class="dashicons dashicons-location"></span></div>
+                            <div className="cal-tooltip-row">{attributes.rooms[event.room].label}</div>
+                        </div>
+                        <div>
+                            <div className="cal-tooltip-row icon"><span class="dashicons dashicons-category"></span></div>
+                            <div className="cal-tooltip-row">{attributes.categories[event.category].label}</div>
+                        </div>
+                        <i></i>
+                    </div>
                 </div>
             );
         } else if (event && event.startTime < i && event.endTime - (1 / attributes.timeslotsPerHour) === i) {

@@ -2,7 +2,7 @@
 	"name": "room-week-view",
 	"version": "0.1.0",
 	"description": "Displays the occupancy of multiple rooms side by side",
-	"author": "The WordPress Contributors",
+	"author": "Stefan May",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
