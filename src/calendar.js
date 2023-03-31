@@ -19,6 +19,8 @@ export function calendarGenerator({ attributes, setAttributes, eventsMap }) {
                     "--cal-scale": "1.0",
                     "--cal-rows": ((attributes.dayEndTime - attributes.dayStartTime)*attributes.timeslotsPerHour + 3) + "",
                     "--cal-row-height": attributes.rowHeight + "px",
+                    "--cal-desc-font-size": attributes.descriptionFontSize + "px",
+                    "--cal-title-font-size": attributes.titleFontSize + "px",
                     "--cal-col-width": "105px",
                     "--cal-col-time-width": "50px"
                 }}>

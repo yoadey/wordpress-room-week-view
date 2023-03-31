@@ -20,9 +20,10 @@ import {
 	Button,
 	Modal,
 	Flex,
+	__experimentalNumberControl as NumberControl,
+	FontSizePicker,
 	PanelBody,
 	PanelRow,
-	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components';
 
 import { calendarGenerator } from './calendar';
@@ -55,6 +56,30 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 	return (
 		<>
 		<InspectorControls>
+				<PanelBody title="Schriften" initialOpen={ true }>
+					<PanelRow>
+						<FontSizePicker
+						        label="Schriftgröße Titel"
+								__nextHasNoMarginBottom
+								value={ attributes.titleFontSize }
+								fallbackFontSize={ 16 }
+								onChange={ ( newTitleFontSize ) => {
+									setAttributes( { titleFontSize: newTitleFontSize } );
+								} }
+							/>
+					</PanelRow>
+					<PanelRow>
+						<FontSizePicker
+						        label="Schriftgröße Beschreibung"
+								__nextHasNoMarginBottom
+								value={ attributes.descriptionFontSize }
+								fallbackFontSize={ 12 }
+								onChange={ ( descriptionFontSize ) => {
+									setAttributes( { descriptionFontSize } );
+								} }
+							/>
+					</PanelRow>
+				</PanelBody>
 				<PanelBody title="Allgemeines" initialOpen={ true }>
 					<PanelRow>
 						<NumberControl

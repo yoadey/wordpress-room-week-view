@@ -28,6 +28,14 @@ import metadata from './block.json';
  */
 registerBlockType(metadata.name, {
 	attributes: {
+        titleFontSize: {
+			type: 'number ',
+			default: 16
+		},
+        descriptionFontSize: {
+			type: 'number ',
+			default: 12
+		},
         dayStartTime: {
 			type: 'number ',
 			default: 12

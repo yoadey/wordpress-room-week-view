@@ -7,6 +7,8 @@
 
 .calendar {
 	font-family: "Montserrat", sans-serif;
+	font-size: var(--cal-desc-font-size);
+	font-weight: 100;
 	line-height: 1em;
 	margin-block-start: 0em;
 	margin-block-end: 0em;
@@ -103,9 +105,14 @@
 	border-right: 1px solid #000000;
 }
 
-p.cal-event-title {
+.cal-event p {
+	line-height: 1.3;
+}
+
+.cal-event p.cal-event-title {
 	margin: 0px;
-	font-size: 14px;
+	font-size: var(--cal-title-font-size);
+	font-weight: 400;
 	color: #000;
 
     word-break: break-word;
@@ -115,7 +122,8 @@ p.cal-event-title {
 
 p.cal-event-description {
 	margin: 0px;
-	font-size: 12px;
+	font-size: var(--cal-desc-font-size);
+	font-weight: 100;
 	color: #333;
 
     word-break: break-word;
@@ -124,7 +132,7 @@ p.cal-event-description {
 
 .cal-tooltip-row {
 	margin: 0px;
-	font-size: 12px;
+	font-size: var(--cal-desc-font-size);
 	color: #333;
 	display: inline-block;
 	width: calc(100% - 20px);
