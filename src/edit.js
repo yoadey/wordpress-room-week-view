@@ -11,12 +11,18 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { 
+	useBlockProps,
+	InspectorControls,
+} from '@wordpress/block-editor';
 
 import {
 	Button,
 	Modal,
 	Flex,
+	PanelBody,
+	PanelRow,
+	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components';
 
 import { calendarGenerator } from './calendar';
@@ -47,6 +53,51 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 	})
 
 	return (
+		<>
+		<InspectorControls>
+				<PanelBody title="Allgemeines" initialOpen={ true }>
+					<PanelRow>
+						<NumberControl
+							label="Tagesbeginn (Stunde)"
+							onChange={ ( val ) => setAttributes( { dayStartTime: Math.round(val) } ) }
+							value={ attributes.dayStartTime }
+							min="0"
+							max={ attributes.dayEndTime - 1}
+							step="1"
+						/>
+					</PanelRow>
+					<PanelRow>
+						<NumberControl
+							label="Tagesende (Stunde)"
+							onChange={ ( val ) => setAttributes( { dayEndTime: Math.round(val) } ) }
+							value={ attributes.dayEndTime }
+							min={ attributes.dayStartTime + 1}
+							max="24"
+							step="1"
+						/>
+					</PanelRow>
+					<PanelRow>
+						<NumberControl
+							label="Blöcke pro Stunde"
+							onChange={ ( timeslotsPerHour ) => setAttributes( { timeslotsPerHour } ) }
+							value={ attributes.timeslotsPerHour }
+							min="1"
+							max="4"
+							step="1"
+						/>
+					</PanelRow>
+					<PanelRow>
+						<NumberControl
+							label="Zeilenhöhe (px)"
+							onChange={ ( rowHeight ) => setAttributes( { rowHeight } ) }
+							value={ attributes.rowHeight }
+							min="10"
+							max="100"
+							step="1"
+						/>
+					</PanelRow>
+				</PanelBody>
+			</InspectorControls>
 		<div {...blockProps}>
 			{isSelected && attributes.errorMessage && (
 				errorNotification(attributes, setAttributes)
@@ -64,6 +115,7 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 			{calendarGenerator({attributes, setAttributes, eventsMap})}
 			{categories({attributes, setAttributes})}
 		</div>
+		</>
 	);
 }
 

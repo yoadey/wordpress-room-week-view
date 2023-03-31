@@ -34,7 +34,11 @@ registerBlockType(metadata.name, {
 		},
         dayEndTime: {
 			type: 'number ',
-			default: 22.75
+			default: 23
+		},
+        rowHeight: {
+			type: 'number ',
+			default: 18
 		},
 		timeslotsPerHour: {
 			type: 'integer',
@@ -65,25 +69,7 @@ registerBlockType(metadata.name, {
 			}
 		}
 	},
-	/*
-	edit: ( props ) => {
-        const {
-            attributes: { dayStartTime },
-            setAttributes
-        } = props;
-        const blockProps = useBlockProps();
-        const onChangeContent = ( newDayStartTime ) => {
-            setAttributes( { dayStartTime: newDayStartTime } );
-        };
-        return (
-            <RichText
-                { ...blockProps }
-                tagName="p"
-                onChange={ onChangeContent }
-                value={ dayStartTime }
-            />
-        );
-    }, */
+
 	/**
 	 * @see ./edit.js
 	 */

@@ -7,5 +7,5 @@ export function groupBy(xs, key) {
 };
 
 export function toTime(time) {
-	return ("00" + Math.floor(time)).slice(-2) + ":" + ("00" + (60 * (time % 1))).slice(-2);
+	return ("00" + Math.floor(time)).slice(-2) + ":" + ("00" + Math.round(60 * (time % 1))).slice(-2);
 }

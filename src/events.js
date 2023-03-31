@@ -77,12 +77,12 @@ export function editEventControl(attributes, setAttributes) {
 								step="1"
 							/> : <TimePartInput
 								onChange={(content) => setAttributes({ editStartTime: Math.floor(attributes.editStartTime) + (content / 60) })}
-								value={(attributes.editStartTime % 1) * 60}
+								value={Math.round((attributes.editStartTime % 1) * 60)}
 								spinControls="none"
 								required={true}
 								min="0"
-								max="45"
-								step="15"
+								max="59"
+								step="1"
 							/>
 						</div>
 					</td>
@@ -101,12 +101,12 @@ export function editEventControl(attributes, setAttributes) {
 								step="1"
 							/> : <TimePartInput
 								onChange={(content) => setAttributes({ editEndTime: Math.floor(attributes.editEndTime) + (content / 60) })}
-								value={(attributes.editEndTime % 1) * 60}
+								value={Math.round((attributes.editEndTime % 1) * 60)}
 								spinControls="none"
 								required={true}
 								min="0"
-								max="45"
-								step="15"
+								max="59"
+								step="1"
 							/>
 						</div>
 					</td>
