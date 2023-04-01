@@ -5,24 +5,29 @@
  * - in the last column the right border must be made thicker
  */
 function updateRooms() {
+  var firstRoom = null;
   var lastRoom = null;
   jQuery('.cal-room-selector').each(function (index, value) {
     var room = this.id;
     const column = jQuery(".cal-" + room);
     if (jQuery("#" + room).prop("checked")) {
+      firstRoom = !firstRoom ? room : firstRoom;
       lastRoom = room;
       column.show();
     } else {
       column.hide();
     }
+    jQuery(".cal-" + room).removeClass("cal-col-first");
     jQuery(".cal-" + room).removeClass("cal-col-right");
   });
   // No room selected, reselect the last deselected room
-  if (!lastRoom) {
+  if (!firstRoom) {
     jQuery(this).prop("checked", true);
-    lastRoom = jQuery(this).prop("id");
-    jQuery(".cal-" + lastRoom).show();
+    firstRoom = jQuery(this).prop("id");
+    lastRoom = firstRoom;
+    jQuery(".cal-" + firstRoom).show();
   }
+  jQuery(".cal-" + firstRoom).addClass("cal-col-first");
   jQuery(".cal-" + lastRoom).addClass("cal-col-right");
 }
 
