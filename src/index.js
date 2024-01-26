@@ -75,7 +75,11 @@ registerBlockType(metadata.name, {
 					"color": "#B9B9B9"
 				}
 			}
-		}
+		},
+		specialoccupancies: {
+			type: 'string ',
+			default: ''
+		},
 	},
 
 	/**

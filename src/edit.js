@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { 
+import {
 	useBlockProps,
 	InspectorControls,
 } from '@wordpress/block-editor';
@@ -32,6 +32,7 @@ import { rooms, editRoomControl } from './rooms';
 import { categories, editCategoryControl } from './categories';
 
 import { groupBy } from './utils';
+import { specialoccupancies } from './specialoccupancy';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -55,48 +56,48 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 
 	return (
 		<>
-		<InspectorControls>
-				<PanelBody title="Schriften" initialOpen={ true }>
+			<InspectorControls>
+				<PanelBody title="Schriften" initialOpen={true}>
 					<PanelRow>
 						<FontSizePicker
-						        label="Schriftgröße Titel"
-								__nextHasNoMarginBottom
-								value={ attributes.titleFontSize }
-								fallbackFontSize={ 16 }
-								onChange={ ( newTitleFontSize ) => {
-									setAttributes( { titleFontSize: newTitleFontSize } );
-								} }
-							/>
+							label="Schriftgröße Titel"
+							__nextHasNoMarginBottom
+							value={attributes.titleFontSize}
+							fallbackFontSize={16}
+							onChange={(newTitleFontSize) => {
+								setAttributes({ titleFontSize: newTitleFontSize });
+							}}
+						/>
 					</PanelRow>
 					<PanelRow>
 						<FontSizePicker
-						        label="Schriftgröße Beschreibung"
-								__nextHasNoMarginBottom
-								value={ attributes.descriptionFontSize }
-								fallbackFontSize={ 12 }
-								onChange={ ( descriptionFontSize ) => {
-									setAttributes( { descriptionFontSize } );
-								} }
-							/>
+							label="Schriftgröße Beschreibung"
+							__nextHasNoMarginBottom
+							value={attributes.descriptionFontSize}
+							fallbackFontSize={12}
+							onChange={(descriptionFontSize) => {
+								setAttributes({ descriptionFontSize });
+							}}
+						/>
 					</PanelRow>
 				</PanelBody>
-				<PanelBody title="Allgemeines" initialOpen={ true }>
+				<PanelBody title="Allgemeines" initialOpen={true}>
 					<PanelRow>
 						<NumberControl
 							label="Tagesbeginn (Stunde)"
-							onChange={ ( val ) => setAttributes( { dayStartTime: Math.round(val) } ) }
-							value={ attributes.dayStartTime }
+							onChange={(val) => setAttributes({ dayStartTime: Math.round(val) })}
+							value={attributes.dayStartTime}
 							min="0"
-							max={ attributes.dayEndTime - 1}
+							max={attributes.dayEndTime - 1}
 							step="1"
 						/>
 					</PanelRow>
 					<PanelRow>
 						<NumberControl
 							label="Tagesende (Stunde)"
-							onChange={ ( val ) => setAttributes( { dayEndTime: Math.round(val) } ) }
-							value={ attributes.dayEndTime }
-							min={ attributes.dayStartTime + 1}
+							onChange={(val) => setAttributes({ dayEndTime: Math.round(val) })}
+							value={attributes.dayEndTime}
+							min={attributes.dayStartTime + 1}
 							max="24"
 							step="1"
 						/>
@@ -104,8 +105,8 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 					<PanelRow>
 						<NumberControl
 							label="Blöcke pro Stunde"
-							onChange={ ( timeslotsPerHour ) => setAttributes( { timeslotsPerHour } ) }
-							value={ attributes.timeslotsPerHour }
+							onChange={(timeslotsPerHour) => setAttributes({ timeslotsPerHour })}
+							value={attributes.timeslotsPerHour}
 							min="1"
 							max="4"
 							step="1"
@@ -114,8 +115,8 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 					<PanelRow>
 						<NumberControl
 							label="Zeilenhöhe (px)"
-							onChange={ ( rowHeight ) => setAttributes( { rowHeight } ) }
-							value={ attributes.rowHeight }
+							onChange={(rowHeight) => setAttributes({ rowHeight })}
+							value={attributes.rowHeight}
 							min="10"
 							max="100"
 							step="1"
@@ -123,23 +124,24 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>
-		<div {...blockProps}>
-			{isSelected && attributes.errorMessage && (
-				errorNotification(attributes, setAttributes)
-			)}
-			{isSelected && attributes.editRoomId && (
-				editRoomControl(attributes, setAttributes)
-			)}
-			{isSelected && attributes.editCatId && (
-				editCategoryControl(attributes, setAttributes)
-			)}
-			{isSelected && attributes.editId && (
-				editEventControl(attributes, setAttributes)
-			)}
-			{rooms({attributes, setAttributes})}
-			{calendarGenerator({attributes, setAttributes, eventsMap})}
-			{categories({attributes, setAttributes})}
-		</div>
+			<div {...blockProps}>
+				{isSelected && attributes.errorMessage && (
+					errorNotification(attributes, setAttributes)
+				)}
+				{isSelected && attributes.editRoomId && (
+					editRoomControl(attributes, setAttributes)
+				)}
+				{isSelected && attributes.editCatId && (
+					editCategoryControl(attributes, setAttributes)
+				)}
+				{isSelected && attributes.editId && (
+					editEventControl(attributes, setAttributes)
+				)}
+				{rooms({ attributes, setAttributes })}
+				{calendarGenerator({ attributes, setAttributes, eventsMap })}
+				{categories({ attributes, setAttributes })}
+				{specialoccupancies({ attributes, setAttributes })}
+			</div>
 		</>
 	);
 }

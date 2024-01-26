@@ -11,6 +11,7 @@ import { rooms } from './rooms';
 import { categories } from './categories';
 
 import { groupBy } from './utils';
+import { specialoccupancies } from './specialoccupancy';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -39,6 +40,7 @@ export default function save({ attributes }) {
 			{rooms({attributes})}
 			{calendarGenerator({attributes, eventsMap})}
 			{categories({attributes})}
+			{specialoccupancies({attributes})}
 		</div>
 	);
 }
