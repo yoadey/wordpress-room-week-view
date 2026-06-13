@@ -4,7 +4,7 @@
  import styled from '@emotion/styled';
 
  import {
-	__experimentalNumberControl as NumberControl,
+	NumberControl,
 } from '@wordpress/components';
  
  export const TimePartInput = styled( NumberControl )`

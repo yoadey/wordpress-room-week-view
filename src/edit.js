@@ -1,29 +1,23 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
 import { __ } from '@wordpress/i18n';
+import { useState } from '@wordpress/element';
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 import {
 	useBlockProps,
 	InspectorControls,
+	BlockControls,
 } from '@wordpress/block-editor';
 
 import {
 	Button,
 	Modal,
 	Flex,
-	__experimentalNumberControl as NumberControl,
+	NumberControl,
 	FontSizePicker,
 	PanelBody,
 	PanelRow,
+	ToolbarGroup,
+	ToolbarButton,
+	Popover,
 } from '@wordpress/components';
 
 import { calendarGenerator } from './calendar';
@@ -34,17 +28,10 @@ import { categories, editCategoryControl } from './categories';
 import { groupBy } from './utils';
 import { specialoccupancies } from './specialoccupancy';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {WPElement} Element to render.
- */
 export default function Edit({ attributes, setAttributes, isSelected }) {
 
 	const blockProps = useBlockProps();
+	const [showTimePicker, setShowTimePicker] = useState(false);
 	var events = attributes.events;
 
 	var eventsMap = {};
@@ -52,10 +39,45 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 	Object.entries(eventsByDays).forEach(([day, eventsByDay]) => {
 		const eventsByDayAndRoom = groupBy(eventsByDay, 'room');
 		eventsMap[day] = eventsByDayAndRoom;
-	})
+	});
 
 	return (
 		<>
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon="clock"
+						label={`Anzeigezeit: ${attributes.dayStartTime}:00 – ${attributes.dayEndTime}:00 Uhr`}
+						showTooltip
+						onClick={() => setShowTimePicker((v) => !v)}
+					/>
+					{showTimePicker && (
+						<Popover
+							placement="bottom-start"
+							onClose={() => setShowTimePicker(false)}
+						>
+							<div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px', minWidth: '220px' }}>
+								<NumberControl
+									label="Tagesbeginn (Stunde)"
+									value={attributes.dayStartTime}
+									onChange={(val) => setAttributes({ dayStartTime: Math.round(Number(val)) })}
+									min={0}
+									max={attributes.dayEndTime - 1}
+									step={1}
+								/>
+								<NumberControl
+									label="Tagesende (Stunde)"
+									value={attributes.dayEndTime}
+									onChange={(val) => setAttributes({ dayEndTime: Math.round(Number(val)) })}
+									min={attributes.dayStartTime + 1}
+									max={24}
+									step={1}
+								/>
+							</div>
+						</Popover>
+					)}
+				</ToolbarGroup>
+			</BlockControls>
 			<InspectorControls>
 				<PanelBody title="Schriften" initialOpen={true}>
 					<PanelRow>
@@ -85,41 +107,41 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 					<PanelRow>
 						<NumberControl
 							label="Tagesbeginn (Stunde)"
-							onChange={(val) => setAttributes({ dayStartTime: Math.round(val) })}
+							onChange={(val) => setAttributes({ dayStartTime: Math.round(Number(val)) })}
 							value={attributes.dayStartTime}
-							min="0"
+							min={0}
 							max={attributes.dayEndTime - 1}
-							step="1"
+							step={1}
 						/>
 					</PanelRow>
 					<PanelRow>
 						<NumberControl
 							label="Tagesende (Stunde)"
-							onChange={(val) => setAttributes({ dayEndTime: Math.round(val) })}
+							onChange={(val) => setAttributes({ dayEndTime: Math.round(Number(val)) })}
 							value={attributes.dayEndTime}
 							min={attributes.dayStartTime + 1}
-							max="24"
-							step="1"
+							max={24}
+							step={1}
 						/>
 					</PanelRow>
 					<PanelRow>
 						<NumberControl
 							label="Blöcke pro Stunde"
-							onChange={(timeslotsPerHour) => setAttributes({ timeslotsPerHour })}
+							onChange={(val) => setAttributes({ timeslotsPerHour: Number(val) })}
 							value={attributes.timeslotsPerHour}
-							min="1"
-							max="4"
-							step="1"
+							min={1}
+							max={4}
+							step={1}
 						/>
 					</PanelRow>
 					<PanelRow>
 						<NumberControl
 							label="Zeilenhöhe (px)"
-							onChange={(rowHeight) => setAttributes({ rowHeight })}
+							onChange={(val) => setAttributes({ rowHeight: Number(val) })}
 							value={attributes.rowHeight}
-							min="10"
-							max="100"
-							step="1"
+							min={10}
+							max={100}
+							step={1}
 						/>
 					</PanelRow>
 				</PanelBody>
@@ -148,7 +170,6 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 
 
 function errorNotification(attributes, setAttributes) {
-
 	return (<Modal title="Fehler" onRequestClose={() => setAttributes({ errorMessage: undefined })}>
 		<p>{attributes.errorMessage}</p>
 		<Flex direction="row" justify="flex-end">

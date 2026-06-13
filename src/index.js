@@ -28,24 +28,24 @@ import metadata from './block.json';
  */
 registerBlockType(metadata.name, {
 	attributes: {
-        titleFontSize: {
-			type: 'number ',
+		titleFontSize: {
+			type: 'number',
 			default: 16
 		},
-        descriptionFontSize: {
-			type: 'number ',
+		descriptionFontSize: {
+			type: 'number',
 			default: 12
 		},
-        dayStartTime: {
-			type: 'number ',
+		dayStartTime: {
+			type: 'number',
 			default: 12
 		},
-        dayEndTime: {
-			type: 'number ',
+		dayEndTime: {
+			type: 'number',
 			default: 23
 		},
-        rowHeight: {
-			type: 'number ',
+		rowHeight: {
+			type: 'number',
 			default: 18
 		},
 		timeslotsPerHour: {
@@ -53,8 +53,8 @@ registerBlockType(metadata.name, {
 			default: 4
 		},
 		events: {
-			type: 'number ',
-			default: 'hello world'
+			type: 'object',
+			default: {}
 		},
 		rooms: {
 			type: 'object',
@@ -77,7 +77,7 @@ registerBlockType(metadata.name, {
 			}
 		},
 		specialoccupancies: {
-			type: 'string ',
+			type: 'string',
 			default: ''
 		},
 	},

@@ -15,7 +15,7 @@
 		"start": "wp-scripts start --mode development"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^25.2.0"
+		"@wordpress/scripts": "^27.9.0"
 	},
 	"dependencies": {
 		"@emotion/styled": "^11.10.5",

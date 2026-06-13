@@ -72,8 +72,8 @@ export function editEventControl(attributes, setAttributes) {
 								value={Math.floor(attributes.editStartTime)}
 								spinControls="none"
 								required={true}
-								min="12"
-								max="22"
+								min={attributes.dayStartTime}
+								max={attributes.dayEndTime - 1}
 								step="1"
 							/> : <TimePartInput
 								onChange={(content) => setAttributes({ editStartTime: Math.floor(attributes.editStartTime) + (content / 60) })}
@@ -96,8 +96,8 @@ export function editEventControl(attributes, setAttributes) {
 								value={Math.floor(attributes.editEndTime)}
 								spinControls="none"
 								required={true}
-								min="12"
-								max="23"
+								min={attributes.dayStartTime}
+								max={attributes.dayEndTime}
 								step="1"
 							/> : <TimePartInput
 								onChange={(content) => setAttributes({ editEndTime: Math.floor(attributes.editEndTime) + (content / 60) })}
