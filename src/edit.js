@@ -1,10 +1,8 @@
 import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
 
 import {
 	useBlockProps,
 	InspectorControls,
-	BlockControls,
 } from '@wordpress/block-editor';
 
 import {
@@ -15,9 +13,6 @@ import {
 	FontSizePicker,
 	PanelBody,
 	PanelRow,
-	ToolbarGroup,
-	ToolbarButton,
-	Popover,
 } from '@wordpress/components';
 
 import { calendarGenerator } from './calendar';
@@ -31,7 +26,6 @@ import { specialoccupancies } from './specialoccupancy';
 export default function Edit({ attributes, setAttributes, isSelected }) {
 
 	const blockProps = useBlockProps();
-	const [showTimePicker, setShowTimePicker] = useState(false);
 	var events = attributes.events;
 
 	var eventsMap = {};
@@ -43,41 +37,6 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 
 	return (
 		<>
-			<BlockControls>
-				<ToolbarGroup>
-					<ToolbarButton
-						icon="clock"
-						label={`Anzeigezeit: ${attributes.dayStartTime}:00 – ${attributes.dayEndTime}:00 Uhr`}
-						showTooltip
-						onClick={() => setShowTimePicker((v) => !v)}
-					/>
-					{showTimePicker && (
-						<Popover
-							placement="bottom-start"
-							onClose={() => setShowTimePicker(false)}
-						>
-							<div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px', minWidth: '220px' }}>
-								<NumberControl
-									label="Tagesbeginn (Stunde)"
-									value={attributes.dayStartTime}
-									onChange={(val) => setAttributes({ dayStartTime: Math.round(Number(val)) })}
-									min={0}
-									max={attributes.dayEndTime - 1}
-									step={1}
-								/>
-								<NumberControl
-									label="Tagesende (Stunde)"
-									value={attributes.dayEndTime}
-									onChange={(val) => setAttributes({ dayEndTime: Math.round(Number(val)) })}
-									min={attributes.dayStartTime + 1}
-									max={24}
-									step={1}
-								/>
-							</div>
-						</Popover>
-					)}
-				</ToolbarGroup>
-			</BlockControls>
 			<InspectorControls>
 				<PanelBody title="Schriften" initialOpen={true}>
 					<PanelRow>
