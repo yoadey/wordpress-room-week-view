@@ -2,9 +2,9 @@
 /**
  * Plugin Name:       Room Week View
  * Description:       Displays the occupancy of multiple rooms side by side
- * Requires at least: 6.1
- * Requires PHP:      7.0
- * Version:           0.1.0
+ * Requires at least: 6.4
+ * Requires PHP:      8.0
+ * Version:           0.2.0
  * Author:            Stefan May
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -31,7 +31,7 @@ function room_week_view_frontend_scripts() {
 			'room_week_view',
         		plugins_url( 'public/js/room_week_view.js', __FILE__ ),
 			array( 'jquery' ),
-			filemtime( plugin_dir_path( __FILE__ ) . 'dist/room_week_view.js' )
+			filemtime( plugin_dir_path( __FILE__ ) . 'public/js/room_week_view.js' )
 		);
 	}
 }
