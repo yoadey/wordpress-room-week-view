@@ -9,7 +9,7 @@ import {
 	Button,
 	Modal,
 	Flex,
-	NumberControl,
+	__experimentalNumberControl as NumberControl,
 	FontSizePicker,
 	PanelBody,
 	PanelRow,
