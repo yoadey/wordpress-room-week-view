@@ -1,0 +1,15 @@
+# Exclude development files from the plugin ZIP
+# wp-scripts plugin-zip reads this file instead of .gitignore
+
+src/
+node_modules/
+.git/
+.gitignore
+.editorconfig
+.eslintcache
+coverage/
+*.log
+*.tgz
+*.zip
+.env
+package-lock.json
